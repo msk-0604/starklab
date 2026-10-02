@@ -1,56 +1,52 @@
 import { processSteps } from "@/lib/site";
 import { ScrollReveal } from "./ScrollReveal";
+import { SectionHeading } from "./SectionHeading";
 
 export function Process() {
   return (
-    <section id="process" className="bg-white py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <ScrollReveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold tracking-wide text-accent">
-            Process
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            制作の流れ
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-            お問い合わせから公開・運用まで、シンプルな5ステップです。
-          </p>
-        </ScrollReveal>
+    <section id="process" className="bg-surface py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-5 sm:px-10">
+        <SectionHeading
+          en="Flow"
+          ja="制作の流れ"
+          lead="お問い合わせから公開・運用まで、シンプルな5ステップで進めます。"
+        />
 
-        <div className="relative mt-16">
-          <div
-            className="pointer-events-none absolute left-[1.65rem] top-4 bottom-4 w-px bg-border lg:left-8 lg:right-8 lg:top-8 lg:bottom-auto lg:h-px lg:w-auto"
-            aria-hidden="true"
-          />
-
-          <ol className="grid gap-6 lg:grid-cols-5 lg:gap-4">
-            {processSteps.map((item, index) => (
-              <ScrollReveal
-                key={item.step}
-                as="li"
-                delay={(Math.min(index, 4) || 0) as 0 | 1 | 2 | 3 | 4}
-                className="relative"
+        <ol className="mt-14 grid gap-4 lg:grid-cols-5 lg:gap-0">
+          {processSteps.map((item, index) => (
+            <ScrollReveal
+              key={item.step}
+              as="li"
+              delay={Math.min(index, 4) as 0 | 1 | 2 | 3 | 4}
+              className="relative"
+            >
+              <div
+                className={`flex h-full gap-5 bg-white px-6 py-7 lg:flex-col lg:gap-0 lg:px-6 lg:py-9 ${
+                  index < processSteps.length - 1 ? "lg:mr-5" : ""
+                }`}
               >
-                <div className="flex gap-4 lg:flex-col lg:items-center lg:text-center">
-                  <div className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-4 border-white bg-accent text-lg font-bold text-white shadow-[var(--shadow-cta)] lg:mx-auto">
-                    {item.step}
-                  </div>
-                  <div className="pt-2 lg:pt-5">
-                    <p className="text-xs font-semibold tracking-wide text-accent">
-                      STEP{item.step}
-                    </p>
-                    <h3 className="mt-1 font-display text-lg font-semibold tracking-tight text-foreground">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">
-                      {item.description}
-                    </p>
-                  </div>
+                <div className="shrink-0">
+                  <p className="font-en text-xs uppercase tracking-[0.2em] text-muted">Step</p>
+                  <p className="font-en text-5xl font-bold leading-none text-accent">
+                    0{item.step}
+                  </p>
                 </div>
-              </ScrollReveal>
-            ))}
-          </ol>
-        </div>
+                <div className="lg:mt-6 lg:border-t lg:border-border lg:pt-6">
+                  <h3 className="text-lg font-bold tracking-[0.05em]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-[1.9] tracking-[0.03em] text-muted">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+              {index < processSteps.length - 1 && (
+                <span
+                  className="absolute right-0 top-1/2 hidden h-0 w-0 -translate-y-1/2 border-y-[10px] border-l-[10px] border-y-transparent border-l-accent lg:block"
+                  aria-hidden="true"
+                />
+              )}
+            </ScrollReveal>
+          ))}
+        </ol>
       </div>
     </section>
   );

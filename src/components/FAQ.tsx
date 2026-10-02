@@ -3,49 +3,40 @@
 import { useState } from "react";
 import { faqs } from "@/lib/site";
 import { ScrollReveal } from "./ScrollReveal";
+import { SectionHeading } from "./SectionHeading";
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8">
-        <ScrollReveal className="text-center">
-          <p className="text-sm font-semibold tracking-wide text-accent">FAQ</p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            よくある質問
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-            お客様からよくいただくご質問にお答えします。
-          </p>
-        </ScrollReveal>
+    <section id="faq" className="bg-white py-20 sm:py-28">
+      <div className="mx-auto max-w-4xl px-5 sm:px-10">
+        <SectionHeading en="FAQ" ja="よくある質問" />
 
-        <ScrollReveal className="mt-12 space-y-3" delay={1}>
+        <ScrollReveal className="mt-14 border-t border-accent" delay={1}>
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
-                key={faq.question}
-                className="overflow-hidden rounded-[1.25rem] border border-border bg-white shadow-[var(--shadow-card)]"
-              >
+              <div key={faq.question} className="border-b border-border">
                 <button
                   type="button"
-                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
+                  className="flex w-full items-center gap-5 py-6 text-left"
                   aria-expanded={isOpen}
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
-                  <span className="font-display text-[15px] font-semibold tracking-tight text-foreground sm:text-base">
-                    Q. {faq.question}
+                  <span className="font-en text-2xl font-bold leading-none text-accent" aria-hidden="true">
+                    Q
                   </span>
-                  <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent transition-transform duration-300 ${
-                      isOpen ? "rotate-45" : ""
-                    }`}
-                    aria-hidden="true"
-                  >
-                    <svg viewBox="0 0 20 20" className="h-4 w-4 fill-current">
-                      <path d="M9 4h2v5h5v2h-5v5H9v-5H4V9h5V4Z" />
-                    </svg>
+                  <span className="flex-1 text-[15px] font-bold tracking-[0.04em] sm:text-base">
+                    {faq.question}
+                  </span>
+                  <span className="relative h-4 w-4 shrink-0 text-accent" aria-hidden="true">
+                    <span className="absolute left-0 top-1/2 h-0.5 w-4 -translate-y-1/2 bg-current" />
+                    <span
+                      className={`absolute left-1/2 top-0 h-4 w-0.5 -translate-x-1/2 bg-current transition-transform duration-300 ${
+                        isOpen ? "scale-y-0" : ""
+                      }`}
+                    />
                   </span>
                 </button>
                 <div
@@ -54,9 +45,14 @@ export function FAQ() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="border-t border-border px-5 pb-5 pt-4 text-sm leading-relaxed text-muted sm:px-6 sm:text-[15px]">
-                      A. {faq.answer}
-                    </p>
+                    <div className="mb-6 flex gap-5 bg-surface px-5 py-5">
+                      <span className="font-en text-2xl font-bold leading-none text-foreground/40" aria-hidden="true">
+                        A
+                      </span>
+                      <p className="flex-1 text-[15px] leading-[1.9] tracking-[0.03em] text-foreground/85">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

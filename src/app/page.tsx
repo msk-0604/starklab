@@ -1,9 +1,13 @@
+import { Concept } from "@/components/Concept";
 import { Contact } from "@/components/Contact";
 import { FAQ } from "@/components/FAQ";
 import { Hero } from "@/components/Hero";
+import { Outline } from "@/components/Outline";
 import { Pricing } from "@/components/Pricing";
+import { Problems } from "@/components/Problems";
 import { Process } from "@/components/Process";
 import { Services } from "@/components/Services";
+import { Strengths } from "@/components/Strengths";
 import { siteConfig } from "@/lib/site";
 
 const jsonLd = {
@@ -33,10 +37,14 @@ export default function HomePage() {
       />
       <main className="flex-1">
         <Hero />
+        <Concept />
+        <Problems />
         <Services />
+        <Strengths />
         <Pricing />
         <Process />
         <FAQ />
+        <Outline />
         <Contact />
       </main>
     </>

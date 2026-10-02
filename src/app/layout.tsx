@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_JP, Plus_Jakarta_Sans } from "next/font/google";
+import { Noto_Sans_JP, Oswald } from "next/font/google";
+import { BackToTop } from "@/components/BackToTop";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta",
+const oswald = Oswald({
+  variable: "--font-oswald",
   subsets: ["latin"],
   display: "swap",
 });
@@ -14,7 +15,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 const notoSansJp = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -79,12 +80,13 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${plusJakarta.variable} ${notoSansJp.variable} h-full scroll-smooth antialiased`}
+      className={`${oswald.variable} ${notoSansJp.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background font-sans text-foreground">
         <Header />
         {children}
         <Footer />
+        <BackToTop />
       </body>
     </html>
   );
