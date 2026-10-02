@@ -14,10 +14,10 @@ export function LegalPage({
   updatedAt = "2026年7月28日",
 }: LegalPageProps) {
   return (
-    <main className="flex-1 bg-white">
+    <main className="flex-1 bg-white pt-16 sm:pt-24">
       <div className="border-b border-border bg-surface">
         <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
-          <p className="text-sm font-semibold text-accent">{siteConfig.name}</p>
+          <p className="font-en text-sm uppercase tracking-[0.16em] text-accent">{siteConfig.name}</p>
           <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {title}
           </h1>

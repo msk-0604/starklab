@@ -1,83 +1,77 @@
-import { siteConfig } from "@/lib/site";
-import { Button } from "./Button";
+import Link from "next/link";
+import { formatYen, images, siteConfig } from "@/lib/site";
+import { ArrowIcon } from "./Icons";
 
 export function Hero() {
+  const { initial, monthly } = siteConfig.pricing;
+
   return (
-    <section className="relative overflow-hidden pt-16 sm:pt-[4.25rem]">
-      {/* Atmospheric full-bleed background */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,113,227,0.14),transparent_55%),radial-gradient(ellipse_50%_40%_at_90%_20%,rgba(90,160,255,0.1),transparent_50%),linear-gradient(180deg,#ffffff_0%,#f5f5f7_100%)]" />
-        <div className="animate-soft-pulse absolute -left-24 top-32 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-        <div className="animate-soft-pulse absolute -right-16 top-48 h-80 w-80 rounded-full bg-sky-300/20 blur-3xl [animation-delay:2s]" />
+    <section className="relative isolate overflow-hidden bg-ink pt-16 text-white sm:pt-24">
+      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div
+          className="photo animate-hero-zoom absolute inset-0"
+          style={{
+            backgroundImage: `url("${images.hero}"), linear-gradient(160deg, #1d4f55 0%, #0f1d22 70%)`,
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,22,26,0.82)_0%,rgba(10,22,26,0.55)_55%,rgba(10,22,26,0.35)_100%)]" />
       </div>
 
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20 lg:grid-cols-2 lg:gap-10 lg:pb-28 lg:pt-24">
-        <div className="text-center lg:text-left">
-          <p className="animate-hero-1 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            {siteConfig.name}
-          </p>
+      <div className="mx-auto flex min-h-[calc(100svh-4rem)] max-w-7xl flex-col justify-center px-5 pb-40 pt-16 sm:min-h-[calc(100svh-6rem)] sm:px-10 sm:pb-48 lg:px-20">
+        <h1>
+          <span className="sr-only">
+            {siteConfig.name}｜{siteConfig.tagline}
+          </span>
+          <span
+            className="block font-en text-[3.4rem] font-bold uppercase leading-[1.02] tracking-[0.01em] sm:text-[5.5rem] lg:text-[7rem]"
+            aria-hidden="true"
+          >
+            <span className="hero-line">
+              <span>Web Design</span>
+            </span>
+            <span className="hero-line">
+              <span className="[animation-delay:0.12s]">And</span>
+            </span>
+            <span className="hero-line">
+              <span className="[animation-delay:0.24s]">Support</span>
+            </span>
+          </span>
+        </h1>
 
-          <h1 className="animate-hero-2 mt-5 font-display text-[1.85rem] font-bold leading-[1.25] tracking-tight text-foreground sm:text-4xl sm:leading-[1.2] lg:text-[2.65rem]">
-            {siteConfig.tagline}
-          </h1>
+        <p className="animate-hero-2 mt-7 text-lg font-bold tracking-[0.06em] sm:text-2xl">
+          中小企業のホームページを、制作から運用までまるごと。
+        </p>
+        <p className="animate-hero-3 mt-4 max-w-2xl text-[15px] leading-[1.9] tracking-[0.04em] text-white/80 sm:text-base">
+          初期費用{formatYen(initial)}円・月額{formatYen(monthly)}円（税込）。サーバー・ドメイン・SSL・保守・更新まで、すべて月額料金に含まれています。
+        </p>
 
-          <p className="animate-hero-3 mx-auto mt-5 max-w-xl whitespace-pre-line text-base leading-relaxed text-muted sm:text-lg lg:mx-0">
-            {siteConfig.description}
-          </p>
-
-          <div className="animate-hero-4 mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center lg:justify-start">
-            <Button href="/#contact" className="min-w-[200px] text-base">
-              無料相談はこちら
-            </Button>
-            <Button
-              href="/#contact"
-              variant="secondary"
-              className="min-w-[160px] text-base"
-            >
-              お問い合わせ
-            </Button>
-          </div>
+        <div className="animate-hero-4 mt-10 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/#contact"
+            className="group inline-flex items-center justify-center gap-4 rounded-sm bg-accent px-9 py-4 text-[15px] font-bold tracking-wide text-white transition-colors hover:bg-accent-hover"
+          >
+            無料相談はこちら
+            <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <Link
+            href="/#pricing"
+            className="inline-flex items-center justify-center rounded-sm border border-white/60 px-9 py-4 text-[15px] font-bold tracking-wide text-white transition-colors hover:bg-white hover:text-foreground"
+          >
+            料金を見る
+          </Link>
         </div>
+      </div>
 
-        {/* Dominant visual: browser mockup */}
-        <div className="animate-hero-4 relative mx-auto w-full max-w-lg lg:max-w-none">
-          <div className="animate-float relative">
-            <div className="overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-[0_30px_80px_rgba(0,0,0,0.1)]">
-              <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-                <div
-                  className="ml-2 h-5 flex-1 rounded-full bg-white"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="space-y-5 bg-gradient-to-b from-white to-surface p-6 sm:p-8">
-                <div className="h-3 w-24 rounded-full bg-accent/20" />
-                <div className="space-y-2">
-                  <div className="h-4 w-4/5 max-w-[85%] rounded-full bg-foreground/10" />
-                  <div className="h-4 w-3/5 max-w-[60%] rounded-full bg-foreground/10" />
-                </div>
-                <div className="h-28 rounded-2xl bg-gradient-to-br from-accent/15 via-sky-100 to-surface sm:h-36" />
-                <div className="grid grid-cols-3 gap-3">
-                  <div className="h-16 rounded-xl bg-white shadow-[var(--shadow-card)]" />
-                  <div className="h-16 rounded-xl bg-white shadow-[var(--shadow-card)]" />
-                  <div className="h-16 rounded-xl bg-white shadow-[var(--shadow-card)]" />
-                </div>
-                <div className="flex justify-center pt-1">
-                  <div className="h-9 w-32 rounded-full bg-accent shadow-[var(--shadow-cta)]" />
-                </div>
-              </div>
-            </div>
-            <div
-              className="pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-accent-glow blur-2xl"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
+      <div
+        className="absolute bottom-10 right-6 hidden flex-col items-center gap-3 sm:flex lg:right-10"
+        aria-hidden="true"
+      >
+        <span className="font-en text-[11px] uppercase tracking-[0.3em] text-white/70 [writing-mode:vertical-rl]">
+          Scroll
+        </span>
+        <span className="relative h-16 w-px overflow-hidden bg-white/25">
+          <span className="animate-scroll-line absolute inset-0 bg-white" />
+        </span>
       </div>
     </section>
   );

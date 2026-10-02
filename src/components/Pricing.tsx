@@ -1,81 +1,109 @@
-import { formatYen, pricingIncludes, siteConfig } from "@/lib/site";
-import { Button } from "./Button";
+import { comparison, formatYen, pricingIncludes, siteConfig } from "@/lib/site";
+import { ArrowIcon, CheckIcon } from "./Icons";
+import Link from "next/link";
 import { ScrollReveal } from "./ScrollReveal";
+import { SectionHeading } from "./SectionHeading";
 
 export function Pricing() {
   const { initial, monthly } = siteConfig.pricing;
 
   return (
-    <section id="pricing" className="bg-surface py-20 sm:py-28">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <ScrollReveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold tracking-wide text-accent">
-            Pricing
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            料金
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-            初期費用ゼロ。わかりやすい月額定額制です。
-          </p>
-        </ScrollReveal>
+    <section id="pricing" className="bg-white py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-5 sm:px-10">
+        <SectionHeading
+          en="Price"
+          ja="料金プラン"
+          lead="初期費用0円、わかりやすい月額定額制。追加費用を気にせずご利用いただけます。"
+        />
 
-        <ScrollReveal className="mx-auto mt-14 max-w-3xl" delay={1}>
-          <div className="overflow-hidden rounded-[2rem] border border-border bg-white shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
-            <div className="border-b border-border bg-gradient-to-br from-accent/[0.06] to-transparent px-6 py-10 text-center sm:px-12 sm:py-12">
-              <div className="grid gap-8 sm:grid-cols-2 sm:gap-4">
-                <div>
-                  <p className="text-sm font-medium text-muted">初期費用</p>
-                  <p className="mt-2 font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+        <ScrollReveal className="mt-14" delay={1}>
+          <div className="grid border border-accent lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col justify-center bg-accent px-7 py-12 text-white sm:px-12">
+              <p className="font-en text-sm uppercase tracking-[0.2em] text-white/70">
+                Standard Plan
+              </p>
+              <p className="mt-2 text-xl font-bold tracking-[0.05em]">定額ホームページ制作プラン</p>
+
+              <div className="mt-8 space-y-6">
+                <div className="flex items-end justify-between gap-4 border-b border-white/25 pb-5">
+                  <span className="text-sm font-medium">初期費用</span>
+                  <span className="font-en text-5xl font-bold leading-none">
                     {formatYen(initial)}
-                    <span className="ml-1 text-2xl font-semibold">円</span>
-                  </p>
-                  <p className="mt-1 text-sm text-muted">（税込）</p>
+                    <span className="ml-1 font-sans text-lg font-bold">円</span>
+                  </span>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-muted">月額料金</p>
-                  <p className="mt-2 font-display text-5xl font-bold tracking-tight text-accent sm:text-6xl">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                  <span className="text-sm font-medium">
+                    月額料金
+                    <span className="ml-1 text-xs text-white/70">（税込）</span>
+                  </span>
+                  <span className="whitespace-nowrap font-en text-6xl font-bold leading-none sm:text-7xl">
                     {formatYen(monthly)}
-                    <span className="ml-1 text-2xl font-semibold">円</span>
-                  </p>
-                  <p className="mt-1 text-sm text-muted">（税込）</p>
+                    <span className="ml-1 font-sans text-lg font-bold">円</span>
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="px-6 py-8 sm:px-12 sm:py-10">
-              <h3 className="text-center text-base font-semibold text-foreground">
-                料金に含まれる内容
-              </h3>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="px-7 py-10 sm:px-12 sm:py-12">
+              <h3 className="text-base font-bold tracking-[0.05em]">月額料金に含まれる内容</h3>
+              <ul className="mt-6 grid gap-x-6 gap-y-4 sm:grid-cols-2">
                 {pricingIncludes.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 rounded-2xl bg-surface px-4 py-3 text-sm font-medium text-foreground"
-                  >
-                    <span
-                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent text-white"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        viewBox="0 0 20 20"
-                        className="h-3.5 w-3.5 fill-current"
-                      >
-                        <path d="M7.7 13.3 4.4 10l-1.4 1.4 4.7 4.7L17.4 6.4 16 5l-8.3 8.3Z" />
-                      </svg>
+                  <li key={item} className="flex items-center gap-3 text-[15px] font-medium">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                      <CheckIcon className="h-3 w-3" />
                     </span>
                     {item}
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-9 flex justify-center">
-                <Button href="/#contact" className="min-w-[220px]">
-                  無料相談はこちら
-                </Button>
-              </div>
+              <p className="mt-8 text-xs leading-relaxed text-muted">
+                ※最低契約期間は12か月です。お支払いは{siteConfig.paymentMethod}となります。
+              </p>
+              <Link
+                href="/#contact"
+                className="group mt-8 inline-flex w-full items-center justify-center gap-4 rounded-sm bg-accent px-9 py-4 text-[15px] font-bold tracking-wide text-white transition-colors hover:bg-accent-hover sm:w-auto"
+              >
+                無料相談はこちら
+                <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
+        </ScrollReveal>
+
+        <ScrollReveal className="mt-20" delay={1}>
+          <h3 className="text-center text-xl font-bold tracking-[0.05em] sm:text-2xl">
+            一般的なホームページ制作との比較
+          </h3>
+          <div className="mt-8">
+            <table className="w-full border-collapse text-left text-[13px] sm:text-[15px]">
+              <thead>
+                <tr className="border-b-2 border-accent">
+                  <th scope="col" className="w-[26%] px-2 py-4 sm:px-4 text-sm font-bold text-muted">
+                    項目
+                  </th>
+                  <th scope="col" className="w-[34%] px-2 py-4 sm:px-4 text-sm font-bold text-muted">
+                    一般的な制作会社
+                  </th>
+                  <th scope="col" className="bg-accent-soft px-2 py-4 sm:px-4 font-en text-base font-bold uppercase sm:text-lg tracking-[0.04em] text-accent">
+                    {siteConfig.name}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.map((row) => (
+                  <tr key={row.item} className="border-b border-border">
+                    <th scope="row" className="px-2 py-5 sm:px-4 font-bold">
+                      {row.item}
+                    </th>
+                    <td className="px-2 py-5 sm:px-4 text-muted">{row.general}</td>
+                    <td className="bg-accent-soft px-2 py-5 sm:px-4 font-bold text-accent">{row.ours}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-muted">※一般的な制作会社の内容は目安であり、会社により異なります。</p>
         </ScrollReveal>
       </div>
     </section>
